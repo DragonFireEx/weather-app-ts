@@ -6,11 +6,37 @@
     <title>WeatherApp</title>
 </head>
 <body>
-    <div class="main-card">
+    <div class="main-box">
         <div class="search-box">
             <label for="search-term">Insert your location</label>
-            <input type="text" name="" id="search-term" placeholder="City">
-            <button>Search</button>
+            
+            <form class="search-box" data-cy="search-form">
+            <div class="search-bar">
+                <input type="text" name="search-term" id="search-term" data-field="search-term" data-cy="search-input" placeholder="City" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="search-suggestion" aria-autocomplete="list">
+            </div>
+            </form>
+            <ul class="search-history" data-field="search-history" data-cy="search-history"></ul>
+            <ul class="search-suggestion" data-field="search-suggestion" data-cy="search-suggestion"></ul>
+
+            <button type="submit" data-field="search-button" data-cy="search-button">Search</button>
+        </div>
+
+        <div class="weather-box" data-cy="weather-box" hidden>
+            <div class="weather-main">
+                <img src="" alt="WeatherIcon" class="city-icon" data-field="icon" data-cy="city-icon">
+                <div class="city-name" data-field="name" data-cy="city-name"></div>
+                <div class="city-temperature" data-field="temperature" data-unit="celsius" data-cy="city-temperature"></div>
+                <div class="city-description" data-field="description" data-cy="city-description"></div>
+            </div>
+            
+
+            <div class="weather-other">
+                <span class="city-air-quality-label">Air Quality</span>
+                <div class="city-air-quality" data-field="air-quality" data-cy="city-air-quality"></div>
+
+                <span class="city-air-quality-index-label">Index</span>
+                <div class="city-air-quality-index" data-field="air-quality-index" data-value="" data-cy="city-air-quality-index"></div>
+            </div>
         </div>
     </div>
 </body>
