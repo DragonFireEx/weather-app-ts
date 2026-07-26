@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 async function searchCity(query) {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`;
     const response = await fetch(url);
@@ -15,4 +17,4 @@ async function searchCity(query) {
         longitude: r.longitude,
     }));
 }
-export {};
+//# sourceMappingURL=api.js.map
