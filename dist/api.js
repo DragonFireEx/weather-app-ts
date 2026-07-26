@@ -1,6 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-async function searchCity(query) {
+// interface Weather {
+//     city: string;
+//     temperature: number;
+//     description: string;
+//     quality: string;
+//     index: number;
+// }
+export async function searchCity(query) {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`;
     const response = await fetch(url);
     if (!response.ok) {

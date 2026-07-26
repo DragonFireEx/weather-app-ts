@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
+    <script type="module" src="dist/main.js"></script>
 </head>
 <body>
     <div class="main-box">
@@ -18,7 +19,7 @@
             <ul class="search-history" data-field="search-history" data-cy="search-history"></ul>
             <ul class="search-suggestion" data-field="search-suggestion" data-cy="search-suggestion"></ul>
 
-            <button type="submit" data-field="search-button" data-cy="search-button">Search</button>
+            <button type="submit" id="search-button" data-field="search-button" data-cy="search-button">Search</button>
         </div>
 
         <div class="weather-box" data-cy="weather-box" hidden>
