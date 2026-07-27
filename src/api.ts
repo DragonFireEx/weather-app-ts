@@ -1,11 +1,3 @@
-// interface Weather {
-//     city: string;
-//     temperature: number;
-//     description: string;
-//     quality: string;
-//     index: number;
-// }
-
 export interface CitySearchResult {
     name: string;
     country: string;
@@ -34,3 +26,4 @@ export async function searchCity(query: string): Promise<CitySearchResult[]> {
         longitude: r.longitude,
     }));
 }
+

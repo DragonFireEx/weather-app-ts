@@ -1,14 +1,29 @@
 import { searchCity } from "./api.js";
-import { getSearchInput, getSearchButton, renderResults } from "./ui.js";
+import { getSearchInput, renderSuggestions, clearSuggestions } from "./ui.js";
 
 const searchInput = getSearchInput();
-const searchButton = getSearchButton();
+let timeoutId: number;
 
-searchButton.addEventListener("click", async () => {
-    const term = searchInput.value.trim();
-    if (term.length < 2) return;
+searchInput.addEventListener("input", () => {
+    clearTimeout(timeoutId);
 
-    const results = await searchCity(term);
-    renderResults(results);
-    searchInput.value = "";
+    timeoutId = window.setTimeout(async () => {
+        const term = searchInput.value.trim();
+
+        if (term.length < 2) {
+            clearSuggestions();
+            return;
+        }
+
+        const results = await searchCity(term);
+
+        renderSuggestions(results, (city) => {
+            searchInput.value = city.name;
+            clearSuggestions();
+            console.log("Wybrano:", city);
+        });
+    }, 300);
 });
+
+const form = document.querySelector("form") as HTMLFormElement;
+form.addEventListener("submit", (event) => event.preventDefault());
