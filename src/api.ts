@@ -1,21 +1,12 @@
-interface Weather {
-    city: string;
-    temperature: number;
-    description: string;
-    quality: string;
-    index: number;
-}
-
-interface CitySearchResult {
+export interface CitySearchResult {
     name: string;
     country: string;
     latitude: number;
     longitude: number;
 }
 
-async function searchCity(query: string): Promise<CitySearchResult[]> {
+export async function searchCity(query: string): Promise<CitySearchResult[]> {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`;
-
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -35,4 +26,4 @@ async function searchCity(query: string): Promise<CitySearchResult[]> {
         longitude: r.longitude,
     }));
 }
-export {}
+
