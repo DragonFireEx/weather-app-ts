@@ -1,4 +1,3 @@
-// storage.ts
 const STORAGE_KEY = "search-history";
 const MAX_HISTORY = 5;
 
