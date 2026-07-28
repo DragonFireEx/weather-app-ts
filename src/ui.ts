@@ -1,4 +1,5 @@
 import type { CitySearchResult, Weather } from "./api.js";
+import { getSearchHistory } from "./storage.js";
 
 export function getSearchInput(): HTMLInputElement {
     return document.getElementById("search-term") as HTMLInputElement;
@@ -43,4 +44,30 @@ export function renderWeather(weather: Weather): void {
     cityAirQualityIndex.setAttribute("data-value", String(weather.airQualityIndex));
 
     weatherBox.hidden = false;
+}
+
+export function getHistoryList(): HTMLUListElement {
+    return document.querySelector(".search-history") as HTMLUListElement;
+}
+
+export function renderHistory(onSelect: (cityName: string) => void): void {
+    const list = getHistoryList();
+    const history = getSearchHistory();
+
+    list.innerHTML = "";
+
+    history.forEach((cityName) => {
+        const item = document.createElement("li");
+        item.textContent = cityName;
+        item.addEventListener("click", () => onSelect(cityName));
+        list.appendChild(item);
+    });
+}
+
+export function showHistory(): void {
+    getHistoryList().hidden = false;
+}
+
+export function hideHistory(): void {
+    getHistoryList().hidden = true;
 }
