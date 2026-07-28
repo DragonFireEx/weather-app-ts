@@ -1,3 +1,4 @@
+import { getSearchHistory } from "./storage.js";
 export function getSearchInput() {
     return document.getElementById("search-term");
 }
@@ -31,5 +32,25 @@ export function renderWeather(weather) {
     cityAirQualityIndex.textContent = String(weather.airQualityIndex);
     cityAirQualityIndex.setAttribute("data-value", String(weather.airQualityIndex));
     weatherBox.hidden = false;
+}
+export function getHistoryList() {
+    return document.querySelector(".search-history");
+}
+export function renderHistory(onSelect) {
+    const list = getHistoryList();
+    const history = getSearchHistory();
+    list.innerHTML = "";
+    history.forEach((cityName) => {
+        const item = document.createElement("li");
+        item.textContent = cityName;
+        item.addEventListener("click", () => onSelect(cityName));
+        list.appendChild(item);
+    });
+}
+export function showHistory() {
+    getHistoryList().hidden = false;
+}
+export function hideHistory() {
+    getHistoryList().hidden = true;
 }
 //# sourceMappingURL=ui.js.map
