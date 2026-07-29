@@ -1,0 +1,60 @@
+:root {
+  /* --- Tło --- */
+  --bg-deep: #0B1120;
+  --bg-mid: #131B32;
+  --bg-mid-2: #1B2748;
+
+  /* --- Akcenty --- */
+  --accent-aurora: #6EE7D8;
+  --accent-aurora-dim: #4FB8AC;
+  --accent-amber: #FFB870;
+  --accent-amber-dim: #E0985A;
+
+  /* --- Szkło (glassmorphism) --- */
+  --glass-fill: rgba(255, 255, 255, 0.055);
+  --glass-fill-strong: rgba(255, 255, 255, 0.09);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-soft: rgba(255, 255, 255, 0.08);
+
+  /* --- Tekst --- */
+  --text-primary: #F1F5F9;
+  --text-secondary: #C3CBDA;
+  --text-muted: #8B96AD;
+  --text-faint: #5B6580;
+
+  /* --- Cienie --- */
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  /* --- Zaokrąglenia --- */
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  /* --- Typografia --- */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Klasa bazowa "szkła" — użyj jej na każdym panelu (search-box, weather-box, dropdown) */
+.glass {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border-soft);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
