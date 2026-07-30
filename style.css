@@ -58,3 +58,24 @@ body {
   -webkit-backdrop-filter: blur(22px) saturate(140%);
   box-shadow: var(--shadow-soft);
 }
+
+.main-box{
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.search-box , .weather-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid green;
+}
+
+.weather-other
+{
+    display: flex;
+    flex-direction: row;
+}

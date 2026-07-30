@@ -1,0 +1,16 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudGrad4a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B7C2DB"/>
+      <stop offset="100%" stop-color="#8B96AD"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad4b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9AF3E8"/>
+      <stop offset="100%" stop-color="#5FCFC2"/>
+    </linearGradient>
+  </defs>
+  <path d="M10 30h26a8.5 8.5 0 0 0 0-17 11.5 11.5 0 0 0-21.5-3A8.8 8.8 0 0 0 10 30z"
+        fill="url(#cloudGrad4a)" opacity="0.85"/>
+  <path d="M16 50h32a10 10 0 0 0 0-20 14 14 0 0 0-26-4A10.5 10.5 0 0 0 16 50z"
+        fill="url(#cloudGrad4b)"/>
+</svg>

@@ -4,10 +4,10 @@ export function getSearchHistory() {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
 }
-export function addToSearchHistory(cityName) {
+export function addToSearchHistory(entry) {
     let history = getSearchHistory();
-    history = history.filter((name) => name !== cityName);
-    history.unshift(cityName);
+    history = history.filter((item) => item.name !== entry.name);
+    history.unshift(entry);
     history = history.slice(0, MAX_HISTORY);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
 }
