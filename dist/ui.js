@@ -1,4 +1,5 @@
 import { getSearchHistory } from "./storage.js";
+import { getWeatherIconPath } from "./api.js";
 export function getSearchInput() {
     return document.getElementById("search-term");
 }
@@ -25,11 +26,13 @@ export function clearSuggestions() {
 }
 export function renderWeather(weather) {
     const weatherBox = document.querySelector(".weather-box");
+    const cityIcon = document.querySelector(".city-icon");
     const cityName = document.querySelector(".city-name");
     const cityTemperature = document.querySelector(".city-temperature");
     const cityDescription = document.querySelector(".city-description");
     const cityAirQuality = document.querySelector(".city-air-quality");
     const cityAirQualityIndex = document.querySelector(".city-air-quality-index");
+    cityIcon.src = getWeatherIconPath(weather.weatherCode);
     cityName.textContent = weather.city;
     cityTemperature.textContent = `${weather.temperature}°C — ${weather.temperatureDescription}`;
     cityDescription.textContent = weather.weatherDescription;
