@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* ============================================================
+   ROOT — design tokens
+   ============================================================ */
+:root {
+  /* Background */
+  --bg-deep: #0B1120;
+  --bg-mid: #131B32;
+  --bg-mid-2: #1B2748;
+
+  /* Accents */
+  --accent-aurora: #6EE7D8;
+  --accent-aurora-dim: #4FB8AC;
+  --accent-amber: #FFB870;
+  --accent-amber-dim: #E0985A;
+
+  /* Glass */
+  --glass-fill: rgba(255, 255, 255, 0.055);
+  --glass-fill-strong: rgba(255, 255, 255, 0.09);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-soft: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #F1F5F9;
+  --text-secondary: #C3CBDA;
+  --text-muted: #8B96AD;
+  --text-faint: #5B6580;
+
+  /* Shadows */
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  /* Border radius */
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px 20px;
+
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(110, 231, 216, 0.14), transparent),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-mid-2) 100%);
+  background-attachment: fixed;
+}
+
+/* Aurora — soft drifting blobs in the background */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+body::before {
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, var(--accent-aurora), transparent 70%);
+  top: -10%;
+  left: -8%;
+}
+
+body::after {
+  width: 38vw;
+  height: 38vw;
+  background: radial-gradient(circle, var(--accent-amber), transparent 70%);
+  bottom: -12%;
+  right: -6%;
+  animation-delay: -11s;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(4%, 6%) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after { animation: none; }
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.main-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================================================
+   GLASS — base panel style
+   ============================================================ */
+.search-box,
+.weather-box {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border-soft);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ============================================================
+   SEARCH BOX
+   ============================================================ */
+.search-box {
+  padding: 28px;
+  position: relative;
+}
+
+.search-box label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+}
+
+.search-box form {
+  margin: 0;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* search icon as input background, no extra HTML element needed */
+#search-term {
+  width: 100%;
+  padding: 15px 16px 15px 46px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.04);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B96AD' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+  background-size: 18px 18px;
+  border: 1px solid var(--glass-border-soft);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#search-term::placeholder {
+  color: var(--text-faint);
+}
+
+#search-term:focus {
+  border-color: var(--accent-aurora-dim);
+  background-color: rgba(110, 231, 216, 0.05);
+  box-shadow: 0 0 0 4px rgba(110, 231, 216, 0.1);
+}
+
+/* ============================================================
+   DROPDOWNS — history and suggestions (shared look)
+   ============================================================ */
+.search-history,
+.search-suggestion {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.search-history:empty,
+.search-suggestion:empty {
+  margin: 0;
+  padding: 0;
+}
+
+.search-history li,
+.search-suggestion li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.search-history li:hover,
+.search-suggestion li:hover {
+  background: var(--glass-fill-strong);
+}
+
+.search-history li .country,
+.search-suggestion li .country {
+  color: var(--text-faint);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* small clock icon before each history item */
+.search-history li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6580' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpolyline points='12 7 12 12 15 14'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* ============================================================
+   WEATHER BOX
+   ============================================================ */
+.weather-box {
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-box::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(255, 184, 112, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.weather-box[hidden] {
+  display: none;
+}
+
+.weather-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  position: relative;
+}
+
+.city-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 16px rgba(110, 231, 216, 0.3));
+}
+
+.city-icon:not([src]),
+.city-icon[src=""] {
+  visibility: hidden;
+}
+
+.city-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.city-temperature {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 4px 0 0;
+}
+
+.city-description {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   AIR QUALITY
+   ============================================================ */
+.weather-other {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 4px 14px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--glass-border-soft);
+  position: relative;
+}
+
+.city-air-quality-label,
+.city-air-quality-index-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* column 1: Air Quality (label above value) */
+.city-air-quality-label {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.city-air-quality {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-aurora);
+}
+
+/* column 2: Index (label above value) */
+.city-air-quality-index-label {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.city-air-quality-index {
+  grid-column: 2;
+  grid-row: 2;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   RESPONSIVENESS
+   ============================================================ */
+@media (max-width: 480px) {
+  body {
+    padding: 32px 16px;
+  }
+
+  .search-box {
+    padding: 20px;
+  }
+
+  .weather-box {
+    padding: 28px 22px;
+  }
+
+  .city-temperature {
+    font-size: 46px;
+  }
+}

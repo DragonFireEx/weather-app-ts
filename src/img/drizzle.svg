@@ -1,0 +1,15 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudGrad6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9AF3E8"/>
+      <stop offset="100%" stop-color="#5FCFC2"/>
+    </linearGradient>
+  </defs>
+  <path d="M14 30h32a9.5 9.5 0 0 0 0-19 13 13 0 0 0-24.5-3.7A9.8 9.8 0 0 0 14 30z"
+        fill="url(#cloudGrad6)"/>
+  <g stroke="#6EE7D8" stroke-width="3" stroke-linecap="round">
+    <line x1="22" y1="42" x2="19" y2="50"/>
+    <line x1="32" y1="42" x2="29" y2="50"/>
+    <line x1="42" y1="42" x2="39" y2="50"/>
+  </g>
+</svg>

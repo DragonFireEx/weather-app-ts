@@ -1,3 +1,4 @@
+export declare function getWeatherIconPath(weatherCode: number): string;
 export interface CitySearchResult {
     name: string;
     country: string;

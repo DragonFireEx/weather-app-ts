@@ -14,7 +14,7 @@ async function selectCity(cityName) {
         return;
     const weather = await getWeather(city.name, city.latitude, city.longitude);
     renderWeather(weather);
-    addToSearchHistory(city.name);
+    addToSearchHistory({ name: city.name, country: city.country });
     renderHistory(selectCity);
     searchInput.value = city.name;
     clearSuggestions();

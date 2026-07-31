@@ -1,5 +1,6 @@
 import type { CitySearchResult, Weather } from "./api.js";
 import { getSearchHistory } from "./storage.js";
+import { getWeatherIconPath } from "./api.js";
 
 export function getSearchInput(): HTMLInputElement {
     return document.getElementById("search-term") as HTMLInputElement;
@@ -18,7 +19,15 @@ export function renderSuggestions(
 
     results.forEach((city) => {
         const item = document.createElement("li");
-        item.textContent = `${city.name}, ${city.country} | ${city.latitude}, ${city.longitude}`;
+
+        const nameNode = document.createTextNode(city.name + " ");
+        const countrySpan = document.createElement("span");
+        countrySpan.className = "country";
+        countrySpan.textContent = city.country;
+
+        item.appendChild(nameNode);
+        item.appendChild(countrySpan);
+
         item.addEventListener("click", () => onSelect(city));
         list.appendChild(item);
     });
@@ -30,12 +39,14 @@ export function clearSuggestions(): void {
 
 export function renderWeather(weather: Weather): void {
     const weatherBox = document.querySelector(".weather-box") as HTMLElement;
+    const cityIcon = document.querySelector(".city-icon") as HTMLImageElement;
     const cityName = document.querySelector(".city-name") as HTMLElement;
     const cityTemperature = document.querySelector(".city-temperature") as HTMLElement;
     const cityDescription = document.querySelector(".city-description") as HTMLElement;
     const cityAirQuality = document.querySelector(".city-air-quality") as HTMLElement;
     const cityAirQualityIndex = document.querySelector(".city-air-quality-index") as HTMLElement;
 
+    cityIcon.src = getWeatherIconPath(weather.weatherCode);
     cityName.textContent = weather.city;
     cityTemperature.textContent = `${weather.temperature}°C — ${weather.temperatureDescription}`;
     cityDescription.textContent = weather.weatherDescription;
@@ -56,10 +67,18 @@ export function renderHistory(onSelect: (cityName: string) => void): void {
 
     list.innerHTML = "";
 
-    history.forEach((cityName) => {
+    history.forEach((entry) => {
         const item = document.createElement("li");
-        item.textContent = cityName;
-        item.addEventListener("click", () => onSelect(cityName));
+
+        const nameSpan = document.createTextNode(entry.name + " ");
+        const countrySpan = document.createElement("span");
+        countrySpan.className = "country";
+        countrySpan.textContent = entry.country;
+
+        item.appendChild(nameSpan);
+        item.appendChild(countrySpan);
+
+        item.addEventListener("click", () => onSelect(entry.name));
         list.appendChild(item);
     });
 }

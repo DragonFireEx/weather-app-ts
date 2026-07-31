@@ -1,3 +1,22 @@
+const weatherIcons = {
+    0: "src/img/clear-sky.svg",
+    1: "src/img/mainly-clear.svg",
+    2: "src/img/partly-cloudy.svg",
+    3: "src/img/overcast.svg",
+    45: "src/img/fog.svg",
+    48: "src/img/fog.svg",
+    51: "src/img/drizzle.svg",
+    61: "src/img/rain.svg",
+    63: "src/img/rain.svg",
+    65: "src/img/rain.svg",
+    71: "src/img/snow.svg",
+    73: "src/img/snow.svg",
+    75: "src/img/snow.svg",
+    95: "src/img/thunderstorm.svg",
+};
+export function getWeatherIconPath(weatherCode) {
+    return weatherIcons[weatherCode] ?? "src/img/partly-cloudy.svg";
+}
 export async function searchCity(query) {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`;
     const response = await fetch(url);

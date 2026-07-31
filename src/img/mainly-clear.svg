@@ -1,0 +1,15 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunGrad2" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFD9A8"/>
+      <stop offset="100%" stop-color="#FFB870"/>
+    </radialGradient>
+    <linearGradient id="cloudGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FF0E4"/>
+      <stop offset="100%" stop-color="#6EE7D8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="26" cy="24" r="12" fill="url(#sunGrad2)"/>
+  <path d="M18 46h28a9 9 0 0 0 0-18 12.5 12.5 0 0 0-23.5-3.5A9.5 9.5 0 0 0 18 46z"
+        fill="url(#cloudGrad2)" opacity="0.92"/>
+</svg>
